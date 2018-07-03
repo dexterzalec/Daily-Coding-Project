@@ -1,3 +1,3 @@
-#Patatap Clone
+Patatap Clone
 
-Pure Javascript/jQuery Patatap Clone
+Pure Javascript/jQuery Patatap Clone and PaperJS framework
