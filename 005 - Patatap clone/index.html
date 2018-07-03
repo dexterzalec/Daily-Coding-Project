@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+  <script type="text/javascript" src="js/paper-full.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.12/howler.js"></script>
+  <script type="text/paperscript" canvas="myCanvas">
+var audio = ['bubbles','clay','confetti','corona','dotted-spiral','flash-1','flash-2','flash-3','glimmer','moon','pinwheel','veil','wipe','ufo','zig-zag','splits','squiggle','piston-1','piston-2','piston-3'];
+var circles = [];
+
+//Press Key
+function onKeyDown(event){
+
+//select random sound from array audio
+var rand = audio[Math.floor(Math.random() * audio.length)];
+  var sound = new Howl({
+      src : ['sounds/'+ rand + '.mp3']
+  });
+
+
+  sound.play();
+  var maxPoint = new Point(view.size.width, view.size.height);
+  var randomPoint = Point.random();
+  var point = maxPoint * randomPoint;
+  var newCircle= new Path.Circle(point, 100);
+  newCircle.fillColor= getRandomColor();
+  circles.push(newCircle);
+console.log("array length:" + circles.length);
+console.log(circles[1]);
+};
+
+//each frame change the hue and the size
+function onFrame(event){
+  for(var i=0; i < circles.length;i++){
+    circles[i].fillColor.hue +=1;
+    circles[i].scale(0.9);
+    if (circles[i].area<1){
+      circles[i].remove();
+      circles.splice(i,1);
+      i--;
+    };
+
+  };
+  };
+
+
+function getRandomColor() {
+  var r= Math.floor(Math.random() * 256);
+  var g= Math.floor(Math.random() * 256);
+  var b= Math.floor(Math.random() * 256);
+return "rgb(" + r + "," + g + "," + b + ")";
+
+}
+
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="myCanvas" resize></canvas>
+  <div id="texts">
+  <h1>This is a Random Circle + Sound Project</h1>
+  <h2>By: Dex</h2>
+</div>
+</body>
+</html>
